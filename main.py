@@ -28,7 +28,9 @@ passwordField.send_keys("password")
 loginButton = webDriver.find_element(by=By.CSS_SELECTOR, value='[type="submit"]')
 loginButton.click()
 
-
+# going to the menu where we can find the operations of the banner
+menuLink = webDriver.find_element(by=By.CSS_SELECTOR , value="[title='Student Services and Financial Aid']")
+menuLink.click()
 
 # credentials = getCred()
 # print(sendingRequest(credentials))

@@ -54,7 +54,14 @@ submitButton = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Submit"
 submitButton.click()
 advancedSearch = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Advanced Search"]')
 advancedSearch.click()
-time.sleep(15)
+
+## performing the search 
+major = Select(webdriver.find_element(by="id", value="subj_id"))
+major.select_by_visible_text("Computer Science")
+campus = Select(webdriver.find_element(by="id", value="camp_id"))
+campus.select_by_visible_text("Byblos")
+sectionSearch = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Section Search"]')
+sectionSearch.click()
 
 
 # credentials = getCred()

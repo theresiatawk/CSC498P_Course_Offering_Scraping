@@ -20,7 +20,7 @@ def sendingRequest(credentials):
 webDriver = webdriver.Chrome()
 # Getting the banner login page into the driver
 webDriver.get("https://banweb.lau.edu.lb/")
-# 
+# Getting the login form's elements and filling them appropriatly 
 loginField = webDriver.find_element(by="id", value="username")
 loginField.send_keys("username")
 passwordField = webDriver.find_element(by="id", value="password")

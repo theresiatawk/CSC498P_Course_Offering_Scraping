@@ -19,50 +19,50 @@ def sendingRequest(credentials):
     return response.text
 
 
-credentials = getCred()
-
-username = credentials['username']
-password = credentials['password']
+def getCourses(userCredentials):
+    username = userCredentials['username']
+    password = userCredentials['password']
 # Creating new web driver to automatically fill the credentials
-webDriver = webdriver.Chrome()
-# Getting the banner login page into the driver
-webDriver.get("https://banweb.lau.edu.lb/")
-# Getting the login form's elements and filling them appropriatly 
-loginField = webDriver.find_element(by="id", value="username")
-loginField.send_keys(username)
-passwordField = webDriver.find_element(by="id", value="password")
-passwordField.send_keys(password)
-loginButton = webDriver.find_element(by=By.CSS_SELECTOR, value='[type="submit"]')
-loginButton.click()
+    webDriver = webdriver.Chrome()
+    # Getting the banner login page into the driver
+    webDriver.get("https://banweb.lau.edu.lb/")
+    # Getting the login form's elements and filling them appropriatly 
+    loginField = webDriver.find_element(by="id", value="username")
+    loginField.send_keys(username)
+    passwordField = webDriver.find_element(by="id", value="password")
+    passwordField.send_keys(password)
+    loginButton = webDriver.find_element(by=By.CSS_SELECTOR, value='[type="submit"]')
+    loginButton.click()
 
-# going to the menu where we can find the operations of the banner
-menuLink = webDriver.find_element(by=By.CSS_SELECTOR , value="[title='Student Services and Financial Aid']")
-menuLink.click()
+    # going to the menu where we can find the operations of the banner
+    menuLink = webDriver.find_element(by=By.CSS_SELECTOR , value="[title='Student Services and Financial Aid']")
+    menuLink.click()
 
-## Going to the registration menu
-registrationLink =  webDriver.find_element(by=By.LINK_TEXT , value="Registration")
-registrationLink.click()
+    ## Going to the registration menu
+    registrationLink =  webDriver.find_element(by=By.LINK_TEXT , value="Registration")
+    registrationLink.click()
 
-## Look-up Classes to Add menu
-lookupLink = webDriver.find_element(by=By.LINK_TEXT, value="Look-up Classes to Add")
-lookupLink.click()
+    ## Look-up Classes to Add menu
+    lookupLink = webDriver.find_element(by=By.LINK_TEXT, value="Look-up Classes to Add")
+    lookupLink.click()
 
-## Going to the advanced search section
-semester = Select(webDriver.find_element(by="id", value="term_input_id"))
-semester.select_by_visible_text("Fall 2023 (View only)")
-submitButton = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Submit"]')
-submitButton.click()
-advancedSearch = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Advanced Search"]')
-advancedSearch.click()
+    ## Going to the advanced search section
+    semester = Select(webDriver.find_element(by="id", value="term_input_id"))
+    semester.select_by_visible_text("Fall 2023 (View only)")
+    submitButton = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Submit"]')
+    submitButton.click()
+    advancedSearch = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Advanced Search"]')
+    advancedSearch.click()
 
-## performing the search 
-major = Select(webdriver.find_element(by="id", value="subj_id"))
-major.select_by_visible_text("Computer Science")
-campus = Select(webdriver.find_element(by="id", value="camp_id"))
-campus.select_by_visible_text("Byblos")
-sectionSearch = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Section Search"]')
-sectionSearch.click()
+    ## performing the search 
+    major = Select(webDriver.find_element(by="id", value="subj_id"))
+    major.select_by_visible_text("Computer Science")
+    campus = Select(webDriver.find_element(by="id", value="camp_id"))
+    campus.select_by_visible_text("Byblos")
+    sectionSearch = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Section Search"]')
+    sectionSearch.click()
+    time.sleep(10)
 
 
-# credentials = getCred()
-# print(sendingRequest(credentials))
+credentials = getCred()
+getCourses(credentials)

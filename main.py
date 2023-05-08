@@ -32,5 +32,11 @@ loginButton.click()
 menuLink = webDriver.find_element(by=By.CSS_SELECTOR , value="[title='Student Services and Financial Aid']")
 menuLink.click()
 
+## Going to the registration menu
+registrationLink =  webDriver.find_element(by=By.LINK_TEXT , value="Registration")
+registrationLink.click()
+
+
+
 # credentials = getCred()
 # print(sendingRequest(credentials))

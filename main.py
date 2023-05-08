@@ -2,7 +2,9 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By 
 from selenium.webdriver.support.ui import Select
+from bs4 import BeautifulSoup as soup
 import time
+import csv
 
 
 def getCred():
@@ -61,8 +63,48 @@ def getCourses(userCredentials):
     campus.select_by_visible_text("Byblos")
     sectionSearch = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Section Search"]')
     sectionSearch.click()
-    time.sleep(10)
+    return webDriver.page_source
+
+
+def coursesToCSV(pageSource):
+    html = soup(pageSource , "html.parser")
+    table = html.find("table", {"class": "datadisplaytable"})
+    table_rows = list()
+    for row in table.findAll("tr"):
+        table_rows.append(row)
+    with open("Courses.csv" , "w") as file:
+        csvWrtiter = csv.writer(file)
+        for i in range(1, len(table_rows)):
+            cells = list()
+            row = table_rows[i]
+            if i != 1:
+                for cell in row.findAll(["td", "th"]):
+                    if row.findAll(["td", "th"]).index(cell) != 0 and row.findAll(["td", "th"]).index(
+                            cell) < 20:
+                        if cell.string:
+                            cells.append(cell.string.strip())
+                        else:
+                            children = cell.findAll()
+                            for i in children:
+                                cells.append(i.string.strip())
+                if len(cells) > 4:
+                    if eval(cells[4]) != 1:
+                        csvWrtiter.writerow(cells)
+                else:
+                    csvWrtiter.writerow(cells)
+            else:
+                for cell in row.findAll(["td", "th"]):
+                    if row.findAll(["td", "th"]).index(cell) != 0 and row.findAll(["td", "th"]).index(
+                            cell) < 20:
+                        if cell.string:
+                            cells.append(cell.string.strip())
+                        else:
+                            children = cell.findAll()
+                            for i in children:
+                                cells.append(i.string.strip())
+                csvWrtiter.writerow(cells)
 
 
 credentials = getCred()
-getCourses(credentials)
+courses = getCourses(credentials)
+coursesToCSV(courses)

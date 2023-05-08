@@ -1,6 +1,7 @@
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By 
+import time
 
 
 def getCred():
@@ -36,6 +37,18 @@ menuLink.click()
 registrationLink =  webDriver.find_element(by=By.LINK_TEXT , value="Registration")
 registrationLink.click()
 
+## Look-up Classes to Add menu
+lookupLink = webDriver.find_element(by=By.LINK_TEXT, value="Look-up Classes to Add")
+lookupLink.click()
+
+## Going to the advanced search section
+semester = Select(webDriver.find_element(by="id", value="term_input_id"))
+semester.select_by_visible_text("Fall 2023 (View only)")
+submitButton = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Submit"]')
+submitButton.click()
+advancedSearch = webDriver.find_element(by=By.CSS_SELECTOR, value='[value="Advanced Search"]')
+advancedSearch.click()
+time.sleep(15)
 
 
 # credentials = getCred()

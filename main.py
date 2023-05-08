@@ -10,7 +10,7 @@ def getCred():
     return credentials
 
 def sendingRequest(credentials):
-    response = requests.post("https://banweb.lau.edu.lb/pkmslogin.form" , data=credentials)
+    response = requests.post("https://banweb.lau.edu.lb/prod/pkmslogin.form" , data=credentials)
     return response.text
 
 
